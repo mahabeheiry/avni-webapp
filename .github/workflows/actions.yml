@@ -31,18 +31,15 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           # Enable linters
           eslint: true
-      - name: LS Before
-        run: du -a > l1
-      - name: Test
-        uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: test # will run `yarn test` command
 
-      - name: LS After
-        run: du -a > l2
-        
-      - name: Diff
-        run: diff l1 l2
+      - name: Test
+        run: yarn test > Test_Result.txt # will run `yarn test` command
+      
+      - name: Save Test Result as Artifacte
+        uses: actions/upload-artifact@v2
+        with:
+          name: code-coverage-report
+          path: Test_Result.txt
         
       #- name: Create the Docker image
       #  run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
