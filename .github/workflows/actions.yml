@@ -15,7 +15,6 @@ jobs:
        with:
          format: YYYYMMDD-HH
          utcOffset: "+08:00"
-         
       - uses: actions/checkout@v2
       - name: Run linters
         uses: wearerequired/lint-action@v1
