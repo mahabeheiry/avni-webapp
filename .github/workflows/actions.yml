@@ -22,11 +22,8 @@ jobs:
         with:
           cmd: install # will run `yarn install` command
 
-      - name: Create local .env file
+      - name: Create local docker image env file
         run: echo $'REACT_APP_COGNITO_IN_DEV=true \nREACT_APP_AWS_REGION=ap-south-1 \nREACT_APP_COGNITO_USER_POOL_ID=ap-south-1_hWEOvjZUH \nREACT_APP_COGNITO_APP_CLIENT_ID=7dbsrgg56mptr4ue1g65nv3s86' > .env.development.local
-        
-      - name: Cat the file
-        run: cat .env.development.local
         
       - name: Run linters
         uses: wearerequired/lint-action@v1
@@ -37,7 +34,7 @@ jobs:
       - name: Test
         run: yarn test &> Test_Results-${{ steps.current-time.outputs.day }}-${{ steps.current-time.outputs.month }}-${{ steps.current-time.outputs.year }}-${{ steps.current-time.outputs.hour }} # will run `yarn test` command
         
-      - name: Archive code coverage results
+      - name: Create Test Results Artifact
         uses: actions/upload-artifact@v2
         with:
           name: Test-Results-Report
