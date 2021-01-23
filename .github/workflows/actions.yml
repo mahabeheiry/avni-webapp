@@ -22,14 +22,13 @@ jobs:
           cmd: install # will run `yarn install` command
 
       - uses: actions/checkout@v2
+
+      - name: Run linters
+        uses: wearerequired/lint-action@v1
         with:
-          path: temp_dir
-      #- name: Run linters
-      #  uses: wearerequired/lint-action@v1
-       # with:
-          #github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           # Enable linters
-         # eslint: true
+          eslint: true
 
       - name: Test
         uses: borales/actions-yarn@v2.0.0
