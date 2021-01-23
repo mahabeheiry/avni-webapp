@@ -32,13 +32,13 @@ jobs:
           # Enable linters
           eslint: true
       - name: Test
-        run: yarn test &> Test_Results-${{ steps.current-time.outputs.day }}-${{ steps.current-time.outputs.month }}-${{ steps.current-time.outputs.year }}-${{ steps.current-time.outputs.hour }}-${{ steps.current-time.outputs.minute }} # will run `yarn test` command
+        run: yarn test &> Test_Results-${{ steps.current-time.outputs.day }}-${{ steps.current-time.outputs.month }}-${{ steps.current-time.outputs.year }}-${{ steps.current-time.outputs.hour }} # will run `yarn test` command
         
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
         with:
-          name: code-coverage-report
-          path: Test.txt
+          name: Test-Results-Report
+          path: Test_Results-${{ steps.current-time.outputs.day }}-${{ steps.current-time.outputs.month }}-${{ steps.current-time.outputs.year }}-${{ steps.current-time.outputs.hour }}
         
       #- name: Create the Docker image
       #  run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
