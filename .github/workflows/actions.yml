@@ -9,19 +9,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-     - name: Get current time
-       uses: 1466587594/get-current-time@v2
-       id: current-time
-       with:
-         format: YYYYMMDD-HH
-         utcOffset: "+08:00"
+      - name: Get current time
+        uses: 1466587594/get-current-time@v2
+        id: current-time
+        with:
+          format: YYYYMMDD-HH
+          utcOffset: "+08:00"
+
       - uses: actions/checkout@v2
       - name: Run linters
         uses: wearerequired/lint-action@v1
         with:
           # Enable linters
           eslint: true
-     
       - name: Build
         uses: borales/actions-yarn@v2.0.0
         with:
