@@ -31,15 +31,21 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           # Enable linters
           eslint: true
+          
+      - name: Pre Test
+        run : echo "Test Started: " + `date` > Test_Results.txt
 
       - name: Test
-        run: yarn test > Test_Result.txt # will run `yarn test` command
-      
-      - name: Save Test Result as Artifacte
+        run: yarn test &>> Test_Results.txt # will run `yarn test` command
+
+      - name: Post Test
+        run : echo "Test Ended: " + `date` >> Test_Results.txt
+        
+      - name: Archive code coverage results
         uses: actions/upload-artifact@v2
         with:
           name: code-coverage-report
-          path: Test_Result.txt
+          path: Test.txt
         
       #- name: Create the Docker image
       #  run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
