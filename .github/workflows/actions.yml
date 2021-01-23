@@ -1,0 +1,33 @@
+name: Build_Test_Docker
+
+on:
+  push:
+    branches:
+      - pro_1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install # will run `yarn install` command
+
+      - name: Test
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: test # will run `yarn test` command
+
+      - name: Create the Docker image
+        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
+      - name: Push Docker image to Docker Hub
+        uses: docker/build-push-action@v1
+        with:
+          username: mbeheiry
+          password: Safia90&&
+          repository: mbeheiry/testing_1
+          tags: "V1.0.1"
+          tag_with_ref: false
