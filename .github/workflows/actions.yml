@@ -9,6 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Get current time
         uses: 1466587594/get-current-time@v2
         id: current-time
@@ -20,9 +21,8 @@ jobs:
         uses: borales/actions-yarn@v2.0.0
         with:
           cmd: install # will run `yarn install` command
-      - name: Remove Dir    
-        run: echo Safia90& | sudo -S chown -R $USER:$USER /home/runner/work/avni-webapp/avni-webapp/node_modules
-      - uses: actions/checkout@v2
+      
+      
 
       - name: Run linters
         uses: wearerequired/lint-action@v1
