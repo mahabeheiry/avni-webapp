@@ -43,14 +43,14 @@ jobs:
           name: Test-Results-Report
           path: Test_Results-${{ steps.current-time.outputs.day }}-${{ steps.current-time.outputs.month }}-${{ steps.current-time.outputs.year }}-${{ steps.current-time.outputs.hour }}
         
-      #- name: Create the Docker image
-      #  run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - name: Create the Docker image
+        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
 
-      #- name: Push Docker image to Docker Hub
-      #  uses: docker/build-push-action@v1
-      #  with:
-      #    username: mbeheiry
-      #    password: Safia90&&
-      #    repository: mbeheiry/testing_1
-      #    tags: V-${{ steps.current-time.outputs.day }}-${{ steps.current-time.outputs.month }}-${{ steps.current-time.outputs.year }}-${{ steps.current-time.outputs.hour }}-${{ steps.current-time.outputs.minute }}
-      #    tag_with_ref: false
+      - name: Push Docker image to Docker Hub
+        uses: docker/build-push-action@v1
+        with:
+          username: mbeheiry
+          password: Safia90&&
+          repository: mbeheiry/testing_1
+          tags: V-${{ steps.current-time.outputs.day }}-${{ steps.current-time.outputs.month }}-${{ steps.current-time.outputs.year }}-${{ steps.current-time.outputs.hour }}-${{ steps.current-time.outputs.minute }}
+          tag_with_ref: false
