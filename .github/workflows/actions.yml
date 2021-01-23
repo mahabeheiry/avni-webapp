@@ -24,12 +24,12 @@ jobs:
       - uses: actions/checkout@v2
         with:
           path: temp_dir
-      - name: Run linters
-        uses: wearerequired/lint-action@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      #- name: Run linters
+      #  uses: wearerequired/lint-action@v1
+       # with:
+          #github_token: ${{ secrets.GITHUB_TOKEN }}
           # Enable linters
-          eslint: true
+         # eslint: true
 
       - name: Test
         uses: borales/actions-yarn@v2.0.0
