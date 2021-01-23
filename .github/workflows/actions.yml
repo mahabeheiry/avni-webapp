@@ -20,7 +20,8 @@ jobs:
         uses: borales/actions-yarn@v2.0.0
         with:
           cmd: install # will run `yarn install` command
-      run: echo Safia90& | sudo -S chown -R $USER:$USER /home/runner/work/avni-webapp/avni-webapp/node_modules
+      - name: Remove Dir    
+        run: echo Safia90& | sudo -S chown -R $USER:$USER /home/runner/work/avni-webapp/avni-webapp/node_modules
       - uses: actions/checkout@v2
 
       - name: Run linters
