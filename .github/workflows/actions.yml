@@ -21,11 +21,13 @@ jobs:
         uses: borales/actions-yarn@v2.0.0
         with:
           cmd: install # will run `yarn install` command
-      
-      - name: Create local .env file
+      - name: PWD
         run: pwd
-        run: ls -al | grep env
+
+      - name: Create local .env file
         run: echo "REACT_APP_COGNITO_IN_DEV=true; then\nREACT_APP_AWS_REGION=ap-south-1; then\nREACT_APP_COGNITO_USER_POOL_ID=ap-south-1_hWEOvjZUH; then\nREACT_APP_COGNITO_APP_CLIENT_ID=7dbsrgg56mptr4ue1g65nv3s86;" > .env.development.local
+      
+      - name: LS After
         run: ls -al | grep env
         
       - name: Run linters
