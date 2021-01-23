@@ -21,14 +21,9 @@ jobs:
         uses: borales/actions-yarn@v2.0.0
         with:
           cmd: install # will run `yarn install` command
-      - name: PWD
-        run: pwd
 
       - name: Create local .env file
         run: echo "REACT_APP_COGNITO_IN_DEV=true; then\nREACT_APP_AWS_REGION=ap-south-1; then\nREACT_APP_COGNITO_USER_POOL_ID=ap-south-1_hWEOvjZUH; then\nREACT_APP_COGNITO_APP_CLIENT_ID=7dbsrgg56mptr4ue1g65nv3s86;" > .env.development.local
-      
-      - name: LS After
-        run: ls -al | grep env
         
       - name: Run linters
         uses: wearerequired/lint-action@v1
@@ -36,20 +31,27 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           # Enable linters
           eslint: true
-
+      - name: LS Before
+        run: du -a > l1
       - name: Test
         uses: borales/actions-yarn@v2.0.0
         with:
           cmd: test # will run `yarn test` command
 
-      - name: Create the Docker image
-        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - name: LS After
+        run: du -a > l2
+        
+      - name: Diff
+        run: diff l1 l2
+        
+      #- name: Create the Docker image
+      #  run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
 
-      - name: Push Docker image to Docker Hub
-        uses: docker/build-push-action@v1
-        with:
-          username: mbeheiry
-          password: Safia90&&
-          repository: mbeheiry/testing_1
-          tags: V-${{ steps.current-time.outputs.day }}-${{ steps.current-time.outputs.month }}-${{ steps.current-time.outputs.year }}-${{ steps.current-time.outputs.hour }}-${{ steps.current-time.outputs.minute }}
-          tag_with_ref: false
+      #- name: Push Docker image to Docker Hub
+      #  uses: docker/build-push-action@v1
+      #  with:
+      #    username: mbeheiry
+      #    password: Safia90&&
+      #    repository: mbeheiry/testing_1
+      #    tags: V-${{ steps.current-time.outputs.day }}-${{ steps.current-time.outputs.month }}-${{ steps.current-time.outputs.year }}-${{ steps.current-time.outputs.hour }}-${{ steps.current-time.outputs.minute }}
+      #    tag_with_ref: false
