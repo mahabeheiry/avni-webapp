@@ -5,6 +5,7 @@ WORKDIR /home/runner/work/avni-webapp/avni-webapp
 COPY package*.json ./
 
 RUN yarn install
+RUN yarn upgrade
 
 COPY . .
 
