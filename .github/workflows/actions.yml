@@ -17,7 +17,7 @@ jobs:
           format: YYYYMMDD-HH
           utcOffset: "+08:00"
           
-      - name: Build #avni-webapp build
+      - name: Build #avni webapp build action step
         uses: borales/actions-yarn@v2.0.0
         with:
           cmd: install # will run `yarn install` command
